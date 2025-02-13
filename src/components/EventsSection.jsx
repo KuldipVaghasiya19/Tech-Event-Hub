@@ -6,6 +6,7 @@ import { RegistrationForm } from './RegistrationForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
+import { EventDetailsModal } from './EventDetailsModal';
 
 const EventsSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
