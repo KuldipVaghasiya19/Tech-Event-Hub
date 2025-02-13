@@ -6,7 +6,6 @@ import { RegistrationForm } from './RegistrationForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
-import { EventDetailsModal } from './EventDetailsModal';
 
 const EventsSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -19,9 +18,10 @@ const EventsSection = () => {
     const navigate = useNavigate();
 
     const handleEventClick = (eventId) => {
-      const event1 = events.find((e) => e.id === eventId);
+        const event1 = events.find((e) => e.id === eventId);
         navigate(`/events/${event1.title}`);
     };
+
 
     const filteredEvents = events
         .filter((event) => {
@@ -40,6 +40,30 @@ const EventsSection = () => {
             const spotsB = b.maxParticipants - b.currentParticipants;
             return spotsA - spotsB;
         });
+
+        const handleRegisterClick = () => {
+            if (!isLoggedIn) {
+              setShowAuthOptions(true);
+            } else {
+              handleRegister(selectedEvent.id);
+            }
+          };
+        
+          const handleRegister = (eventId) => {
+            const event = events.find((e) => e.id === eventId);
+            if (event) {
+              setSelectedEvent(event);
+              setShowEventDetails(false);
+              setShowRegistrationForm(true);
+            }
+          };
+        
+          const handleRegistrationSubmit = (formData) => {
+            console.log('Registration submitted:', formData);
+            alert('Registration successful! You will receive a confirmation email shortly.');
+            setShowRegistrationForm(false);
+            setSelectedEvent(null);
+          };
 
     return (
         <div>
@@ -104,11 +128,12 @@ const EventsSection = () => {
 
             {showRegistrationForm && selectedEvent && (
                 <RegistrationForm
-                    event={selectedEvent}
-                    onClose={() => {
-                        setShowRegistrationForm(false);
-                        setSelectedEvent(null);
-                    }}
+                event={selectedEvent}
+                onClose={() => {
+                    setShowRegistrationForm(false);
+                    setSelectedEvent(null);
+                }}
+                onSubmit={handleRegistrationSubmit}
                 />
             )}
 

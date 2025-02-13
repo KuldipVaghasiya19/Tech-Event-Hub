@@ -10,24 +10,33 @@ import {
   ExternalLink,
   Sparkles,
 } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { events } from '../data/events';
+import { RegistrationForm } from './RegistrationForm';
 
-export function EventDetailsModal({ event, onClose, onRegister }) {
-  // Ensure the event object is defined and has the necessary properties
+export function EventDetailsModal({ onRegister }) {
+  const { title } = useParams();
+  const navigate = useNavigate();
+  const event = events.find((e) => e.title === title);
+
   if (!event) {
-    return null; // Optionally, you can return a loading state or null
+    return <div>Event not found</div>;
   }
 
   const isAlmostFull = event.currentParticipants >= event.maxParticipants * 0.8;
   const spotsLeft = event.maxParticipants - event.currentParticipants;
   const isEarlyBird = new Date(event.earlyBirdDeadline) > new Date();
 
+  const handleClose = () => {
+    navigate('/events');
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
       <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full my-8 pt-10">
         <div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-gray-600 hover:text-gray-900 z-10"
           >
             <X className="w-6 h-6" />
