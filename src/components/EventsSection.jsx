@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const EventsSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchCity, setSearchCity] = useState('');
     const [sortBy, setSortBy] = useState('date');
     const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
     const [selectedType, setSelectedType] = useState('all');
@@ -22,15 +23,21 @@ const EventsSection = () => {
         navigate(`/events/${event1.title}`);
     };
 
+    const handleRegister = (eventId) => {
+        const event1 = events.find((e) => e.id === eventId);
+        setSelectedEvent(event1);
+        setShowRegistrationForm(true);
+    };
 
     const filteredEvents = events
         .filter((event) => {
             const matchesSearch =
                 event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 event.description.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesCity = searchCity === '' || event.location.toLowerCase().includes(searchCity.toLowerCase());
             const matchesType = selectedType === 'all' || event.type === selectedType;
             const matchesFeatured = showFeaturedOnly ? event.featured : true;
-            return matchesSearch && matchesType && matchesFeatured;
+            return matchesSearch && matchesCity && matchesType && matchesFeatured;
         })
         .sort((a, b) => {
             if (sortBy === 'date') {
@@ -40,30 +47,6 @@ const EventsSection = () => {
             const spotsB = b.maxParticipants - b.currentParticipants;
             return spotsA - spotsB;
         });
-
-        const handleRegisterClick = () => {
-            if (!isLoggedIn) {
-              setShowAuthOptions(true);
-            } else {
-              handleRegister(selectedEvent.id);
-            }
-          };
-        
-          const handleRegister = (eventId) => {
-            const event = events.find((e) => e.id === eventId);
-            if (event) {
-              setSelectedEvent(event);
-              setShowEventDetails(false);
-              setShowRegistrationForm(true);
-            }
-          };
-        
-          const handleRegistrationSubmit = (formData) => {
-            console.log('Registration submitted:', formData);
-            alert('Registration successful! You will receive a confirmation email shortly.');
-            setShowRegistrationForm(false);
-            setSelectedEvent(null);
-          };
 
     return (
         <div>
@@ -79,6 +62,16 @@ const EventsSection = () => {
                                 placeholder="Search events..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                            />
+                        </div>
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Search by city..."
+                                value={searchCity}
+                                onChange={(e) => setSearchCity(e.target.value)}
                                 className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                             />
                         </div>
@@ -101,15 +94,6 @@ const EventsSection = () => {
                                 <option value="date">Sort by Date</option>
                                 <option value="spots">Sort by Available Spots</option>
                             </select>
-                            <label className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    checked={showFeaturedOnly}
-                                    onChange={(e) => setShowFeaturedOnly(e.target.checked)}
-                                    className="text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <span className="text-gray-700">Featured Only</span>
-                            </label>
                         </div>
                     </div>
                 </div>
@@ -120,6 +104,7 @@ const EventsSection = () => {
                             key={event.id}
                             event={event}
                             onClick={() => handleEventClick(event.id)}
+                            onRegister={handleRegister}
                             featured={event.featured}
                         />
                     ))}
@@ -128,12 +113,11 @@ const EventsSection = () => {
 
             {showRegistrationForm && selectedEvent && (
                 <RegistrationForm
-                event={selectedEvent}
-                onClose={() => {
-                    setShowRegistrationForm(false);
-                    setSelectedEvent(null);
-                }}
-                onSubmit={handleRegistrationSubmit}
+                    event={selectedEvent}
+                    onClose={() => {
+                        setShowRegistrationForm(false);
+                        setSelectedEvent(null);
+                    }}
                 />
             )}
 

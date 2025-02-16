@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, GraduationCap, Mail, User, Building, Phone } from 'lucide-react';
 
-export function ParticipantProfile({ participant }) {
+export default function ParticipantProfile({ participant }) {
   const [activeTab, setActiveTab] = useState('upcoming');
 
   const EventTable = ({ events, emptyMessage, type }) => (

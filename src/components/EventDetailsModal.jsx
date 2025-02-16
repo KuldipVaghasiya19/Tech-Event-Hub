@@ -12,7 +12,6 @@ import {
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { events } from '../data/events';
-import { RegistrationForm } from './RegistrationForm';
 
 export function EventDetailsModal({ onRegister }) {
   const { title } = useParams();

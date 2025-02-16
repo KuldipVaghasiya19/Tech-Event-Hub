@@ -3,7 +3,8 @@ import { Calendar, Users, Clock, CheckCircle, XCircle, Building, Mail, Phone, Ma
 import { CreateEventForm } from './CreateEventForm';
 import { events } from '../data/events';
 
-export function OrganizationProfile({ organization, onLogout, onEventsClick, showEvents }) {
+
+export default function OrganizationProfile({ organization, onLogout, onEventsClick, showEvents }) {
   const [activeTab, setActiveTab] = useState('current');
   const [showCreateEventForm, setShowCreateEventForm] = useState(false);
   const currentDate = new Date();
@@ -109,7 +110,6 @@ export function OrganizationProfile({ organization, onLogout, onEventsClick, sho
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Organization Header */}
       <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-32"></div>
         <div className="px-8 py-6 -mt-16">
@@ -129,22 +129,10 @@ export function OrganizationProfile({ organization, onLogout, onEventsClick, sho
                 <div className="flex gap-4">
                   <button
                     onClick={() => setShowCreateEventForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors "
                   >
                     <Plus className="w-4 h-4" />
                     Create Event
-                  </button>
-                  <button
-                    onClick={onEventsClick}
-                    className="px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                  >
-                    Events
-                  </button>
-                  <button
-                    onClick={onLogout}
-                    className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    Logout
                   </button>
                 </div>
               </div>
@@ -167,9 +155,8 @@ export function OrganizationProfile({ organization, onLogout, onEventsClick, sho
         </div>
       </div>
 
-      {showEvents ? (
+     
         <>
-          {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Total Events</h3>
@@ -235,7 +222,7 @@ export function OrganizationProfile({ organization, onLogout, onEventsClick, sho
             </div>
           </div>
         </>
-      ) : null}
+      
 
       {showCreateEventForm && (
         <CreateEventForm
