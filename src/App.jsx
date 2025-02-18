@@ -27,7 +27,7 @@ function App() {
   return (
       <div className="min-h-screen bg-white">
         <Routes>
-          <Route path="/" element={<Homee />} />
+          {/* <Route path="/" element={<Homee />} /> */}
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/events" element={<EventsSection />} />
@@ -36,7 +36,7 @@ function App() {
           <Route path="/organization/:name" element={<OrganizationProfile />} />
         </Routes>
         {/* <OrganizationProfile organization={mockOrganization}/> */}
-        {/* <ParticipantProfile participant={mockParticipant} /> */}
+        <ParticipantProfile participant={mockParticipant} />
       </div>
   );
 }

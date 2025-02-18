@@ -120,8 +120,9 @@ const EventsSection = () => {
                     }}
                 />
             )}
-
+            <div className="mt-8 mb-8">
             <Footer />
+            </div>
         </div>
     );
 };

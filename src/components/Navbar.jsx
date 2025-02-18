@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LogIn, UserPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import HeroSection from './Herosection';
 import { AuthModal } from './AuthModal';
 
 const LoginButton = ({ handleAuthClick }) => (
@@ -56,7 +55,6 @@ const Navbar = () => {
   const [authType, setAuthType] = useState('');
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showSignupOptions, setShowSignupOptions] = useState(false);
-  const navigate = useNavigate();
 
   const handleAuthClick = (type) => {
     setAuthType(type);
@@ -72,7 +70,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
               <Link to="/">
@@ -103,7 +101,6 @@ const Navbar = () => {
                 </button>
               </Link>
 
-              {/* Show login or logout button based on login status */}
               {isLoggedIn ? (
                 <LogoutButton handleLogout={handleLogout} />
               ) : (

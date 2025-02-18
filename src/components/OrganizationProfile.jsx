@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Calendar, Users, Clock, CheckCircle, XCircle, Building, Mail, Phone, MapPin, Plus } from 'lucide-react';
+import { CheckCircle, XCircle, Building, Mail, MapPin, Plus } from 'lucide-react';
 import { CreateEventForm } from './CreateEventForm';
-import { events } from '../data/events';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 
 export default function OrganizationProfile({ organization, onLogout, onEventsClick, showEvents }) {
@@ -9,7 +10,6 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
   const [showCreateEventForm, setShowCreateEventForm] = useState(false);
   const currentDate = new Date();
   
-  // Separate events into past, current, and future
   const pastEvents = organization.events.filter(event => new Date(event.date) < currentDate);
   const currentEvents = organization.events.filter(event => {
     const eventDate = new Date(event.date);
@@ -21,7 +21,6 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
 
   const handleCreateEvent = (eventData) => {
     console.log('New event:', eventData);
-    // Here you would typically make an API call to create the event
     setShowCreateEventForm(false);
   };
 
@@ -109,9 +108,10 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-32"></div>
+    <div className="max-w mx-auto">
+      <Navbar/>
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8 py-18">
+        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-32 "></div>
         <div className="px-8 py-6 -mt-16">
           <div className="flex items-end gap-6">
             <div className="bg-white p-2 rounded-lg shadow-lg">
@@ -129,7 +129,7 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
                 <div className="flex gap-4">
                   <button
                     onClick={() => setShowCreateEventForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors "
+                    className="flex gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors "
                   >
                     <Plus className="w-4 h-4" />
                     Create Event
@@ -178,7 +178,6 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
             </div>
           </div>
 
-          {/* Events Tabs */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="border-b">
               <div className="flex">
@@ -230,6 +229,9 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
           onSubmit={handleCreateEvent}
         />
       )}
+      <div className="mt-8 mb-8">
+      <Footer />
+      </div>
     </div>
   );
 }

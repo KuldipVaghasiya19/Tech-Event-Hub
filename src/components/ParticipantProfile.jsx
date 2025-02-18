@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Users, GraduationCap, Mail, User, Building, Phone } from 'lucide-react';
+import {GraduationCap, Mail,Building, Phone } from 'lucide-react';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function ParticipantProfile({ participant }) {
   const [activeTab, setActiveTab] = useState('upcoming');
@@ -100,8 +102,8 @@ export default function ParticipantProfile({ participant }) {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Participant Header */}
+    <div className="max-w">
+      <Navbar/>
       <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-purple-500 to-indigo-600 h-32"></div>
         <div className="px-8 py-6 -mt-16">
@@ -138,7 +140,6 @@ export default function ParticipantProfile({ participant }) {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Total Events</h3>
@@ -154,7 +155,6 @@ export default function ParticipantProfile({ participant }) {
         </div>
       </div>
 
-      {/* Events Tabs */}
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="border-b">
           <div className="flex">
@@ -214,6 +214,9 @@ export default function ParticipantProfile({ participant }) {
             />
           )}
         </div>
+      </div>
+      <div className="mt-8 mb-8">
+       <Footer  />
       </div>
     </div>
   );

@@ -13,39 +13,9 @@ function AboutUs() {
     { label: 'Cities', value: '50+', icon: MapPin },
   ];
 
-  const team = [
-    {
-      name: 'Priya Sharma',
-      role: 'CEO & Founder',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80',
-      bio: 'Former tech lead at Google with a passion for building communities.',
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com'
-    },
-    {
-      name: 'Rahul Verma',
-      role: 'CTO',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80',
-      bio: 'Ex-Microsoft engineer with expertise in scalable platforms.',
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com'
-    },
-    {
-      name: 'Neha Patel',
-      role: 'Head of Operations',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80',
-      bio: 'Seasoned operations expert with focus on user experience.',
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com'
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-     
       <Navbar/>
-    
       <div className="relative bg-indigo-900 text-white py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -68,7 +38,6 @@ function AboutUs() {
         </div>
       </div>
 
-      {/* Stats with Animation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16">
         <div className="bg-white rounded-2xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-8 p-8">
           {stats.map((stat, index) => (
@@ -82,7 +51,6 @@ function AboutUs() {
         </div>
       </div>
 
-      {/* Mission & Vision */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid md:grid-cols-2 gap-12">
           <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-2xl shadow-lg transform hover:-translate-y-1 transition-transform">
@@ -114,9 +82,6 @@ function AboutUs() {
         </div>
       </div>
 
-      
-
-      {/* Values */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>

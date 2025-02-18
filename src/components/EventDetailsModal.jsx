@@ -7,8 +7,6 @@ import {
   Tag,
   Trophy,
   Clock,
-  ExternalLink,
-  Sparkles,
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { events } from '../data/events';
@@ -31,47 +29,39 @@ export function EventDetailsModal({ onRegister }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full my-8 pt-10">
-        <div>
-          <button
-            onClick={handleClose}
-            className="absolute top-4 right-4 bg-white/90 p-2 rounded-full text-gray-600 hover:text-gray-900 z-10"
-          >
-            <X className="w-6 h-6" />
-          </button>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto py-10">
+      <div className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full pt-10">
+        <button
+          onClick={handleClose}
+          className="absolute top-1/4 right-4 transform -translate-y-1/2 bg-white/90 p-2 rounded-full text-gray-600 hover:text-gray-900 z-10"
+        >
+          <X className="w-6 h-6" />
+        </button>
 
-          <div className="relative h-96">
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-full object-cover rounded-t-xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-xl"></div>
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium ${
-                    event.type === 'hackathon'
-                      ? 'bg-purple-500 text-white'
-                      : event.type === 'conference'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-green-500 text-white'
-                  }`}
-                >
-                  {event.type}
-                </span>
-                {event.featured && (
-                  <span className="flex items-center gap-1 bg-yellow-500 text-white px-4 py-1.5 rounded-full font-medium">
-                    <Sparkles className="w-4 h-4" />
-                    Featured
-                  </span>
-                )}
-              </div>
-              <h2 className="text-4xl font-bold text-white mb-2">
-                {event.title}
-              </h2>
+        <div className="relative h-96">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover rounded-t-xl"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-xl"></div>
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span
+                className={`px-4 py-1.5 rounded-full text-sm font-medium ${
+                  event.type === 'hackathon'
+                    ? 'bg-purple-500 text-white'
+                    : event.type === 'conference'
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-green-500 text-white'
+                }`}
+              >
+                {event.type}
+              </span>
             </div>
+            <h2 className="text-4xl font-bold text-white mb-2">
+              {event.title}
+            </h2>
           </div>
         </div>
 
@@ -118,6 +108,22 @@ export function EventDetailsModal({ onRegister }) {
                     </div>
                   ))}
                 </div>
+
+                {event.prices && (
+                  <div className="mt-4">
+                    <h4 className="text-xl font-bold text-gray-900">Prices</h4>
+                    <ul className="space-y-2">
+                      {event.prices.map((price, index) => (
+                        <li
+                          key={index}
+                          className="text-gray-600 flex items-center gap-2"
+                        >
+                          {price}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -186,18 +192,6 @@ export function EventDetailsModal({ onRegister }) {
                       ? 'Register Now - Almost Full!'
                       : 'Register Now'}
                   </button>
-
-                  {event.website && (
-                    <a
-                      href={event.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition-colors border border-gray-300"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Visit Event Website
-                    </a>
-                  )}
                 </div>
               </div>
             </div>
