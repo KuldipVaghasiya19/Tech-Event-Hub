@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   X,
   Calendar,
@@ -10,11 +10,13 @@ import {
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { events } from '../data/events';
+import RegistrationForm from './RegistrationForm';
 
-export function EventDetailsModal({ onRegister }) {
+export function EventDetailsModal() {
   const { title } = useParams();
   const navigate = useNavigate();
   const event = events.find((e) => e.title === title);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false); 
 
   if (!event) {
     return <div>Event not found</div>;
@@ -26,6 +28,10 @@ export function EventDetailsModal({ onRegister }) {
 
   const handleClose = () => {
     navigate('/events');
+  };
+
+  const handleRegister = () => {
+    setShowRegistrationForm(true); 
   };
 
   return (
@@ -181,7 +187,7 @@ export function EventDetailsModal({ onRegister }) {
 
                 <div className="space-y-3">
                   <button
-                    onClick={() => onRegister(event.id)}
+                    onClick={handleRegister} 
                     className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all ${
                       isAlmostFull
                         ? 'bg-red-500 hover:bg-red-600'
@@ -196,6 +202,9 @@ export function EventDetailsModal({ onRegister }) {
               </div>
             </div>
           </div>
+          {showRegistrationForm && (
+           <RegistrationForm event={event} onClose={() => setShowRegistrationForm(false)} /> 
+          )}
         </div>
       </div>
     </div>

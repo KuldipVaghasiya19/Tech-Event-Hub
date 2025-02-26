@@ -215,7 +215,7 @@ export default function ParticipantProfile({ participant }) {
           )}
         </div>
       </div>
-      <div className="mt-8 mb-8">
+      <div className="mt-8">
        <Footer  />
       </div>
     </div>

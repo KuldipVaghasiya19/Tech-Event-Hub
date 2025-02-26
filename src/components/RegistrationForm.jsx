@@ -5,8 +5,6 @@ import {
   AlertCircle,
   Users,
   Upload,
-  Code,
-  FileText,
   Mail,
   Building,
   Phone,
@@ -18,9 +16,7 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
     fullName: '',
     email: '',
     phone: '',
-    organization: '',
     dietaryRestrictions: '',
-    tshirtSize: 'M',
     agreeToTerms: false,
 
     // Hackathon specific fields
@@ -32,10 +28,7 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
     teamLogo: null,
 
     // Workshop/Conference specific fields
-    experience: '',
     expectations: '',
-    linkedinProfile: '',
-    currentRole: '',
     specialRequirements: '',
   });
 
@@ -267,36 +260,7 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
 
   const renderConferenceFields = () => (
     <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Current Role
-        </label>
-        <input
-          type="text"
-          value={formData.currentRole}
-          onChange={(e) =>
-            setFormData({ ...formData, currentRole: e.target.value })
-          }
-          className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg"
-          placeholder="Your current role"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          LinkedIn Profile
-        </label>
-        <input
-          type="url"
-          value={formData.linkedinProfile}
-          onChange={(e) =>
-            setFormData({ ...formData, linkedinProfile: e.target.value })
-          }
-          className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg"
-          placeholder="https://linkedin.com/in/yourprofile"
-        />
-      </div>
-
+      
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           What do you expect to learn?
@@ -330,8 +294,8 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
   );
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+<div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50 bg-transparent">
+  <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white px-6 py-4 border-b flex items-center justify-between rounded-t-xl z-20">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">
@@ -435,31 +399,7 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
               )}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Organization/Institution *
-              </label>
-              <div className="relative">
-                <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  value={formData.organization}
-                  onChange={(e) =>
-                    setFormData({ ...formData, organization: e.target.value })
-                  }
-                  className={`w-full pl-10 pr-4 py-2 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    errors.organization ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your organization"
-                />
-              </div>
-              {errors.organization && (
-                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.organization}
-                </p>
-              )}
-            </div>
+             
           </div>
 
           {/* Event Specific Fields */}
@@ -551,3 +491,4 @@ export function RegistrationForm({ event, onClose, onSubmit }) {
     </div>
   );
 }
+export default RegistrationForm;

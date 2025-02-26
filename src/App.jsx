@@ -16,8 +16,8 @@ function App() {
     events: events,
   };
   const mockParticipant = {
-    name: 'Rajesh Kumar',
-    email: 'rajesh.kumar@gmail.com',
+    name: 'Kuldip Vaghasiya',
+    email: 'kuldip@gmail.com',
     university: 'IIT Delhi',
     course: 'Computer Science',
     registeredEvents: events.slice(0, 3),
@@ -27,7 +27,7 @@ function App() {
   return (
       <div className="min-h-screen bg-white">
         <Routes>
-          {/* <Route path="/" element={<Homee />} /> */}
+          <Route path="/" element={<Homee />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/events" element={<EventsSection />} />
@@ -36,7 +36,7 @@ function App() {
           <Route path="/organization/:name" element={<OrganizationProfile />} />
         </Routes>
         {/* <OrganizationProfile organization={mockOrganization}/> */}
-        <ParticipantProfile participant={mockParticipant} />
+        {/* <ParticipantProfile participant={mockParticipant} /> */}
       </div>
   );
 }

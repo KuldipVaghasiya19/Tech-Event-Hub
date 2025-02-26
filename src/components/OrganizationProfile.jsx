@@ -229,7 +229,7 @@ export default function OrganizationProfile({ organization, onLogout, onEventsCl
           onSubmit={handleCreateEvent}
         />
       )}
-      <div className="mt-8 mb-8">
+      <div className="mt-8">
       <Footer />
       </div>
     </div>

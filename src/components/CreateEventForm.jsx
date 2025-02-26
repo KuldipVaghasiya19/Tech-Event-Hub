@@ -12,6 +12,7 @@ export function CreateEventForm({ onClose, onSubmit }) {
     tags: [],
     image: '',
     price: '',
+    maxTeamMembers: ''
   });
 
   const handleSubmit = (e) => {
@@ -174,12 +175,30 @@ export function CreateEventForm({ onClose, onSubmit }) {
           </div>
 
           {/* Price (Only for Hackathon) */}
-          {formData.type === 'hackathon' && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Price *</label>
-              <input type="number" required value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter event price" />
-            </div>
-          )}
+            {formData.type === 'hackathon' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price *</label>
+                <input 
+                  type="number" 
+                  required 
+                  value={formData.price} 
+                  onChange={(e) => setFormData({ ...formData, price: e.target.value })} 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Enter event price" 
+                />
+
+                <label className="block text-sm font-medium text-gray-700 mt-3 mb-1">Max Team Members *</label>
+                <input 
+                  type="number" 
+                  required 
+                  value={formData.maxTeamMembers} 
+                  onChange={(e) => setFormData({ ...formData, maxTeamMembers: e.target.value })} 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Enter max team members" 
+                />
+              </div>
+              )}
+
 
           {/* Submit */}
           <button type="submit" className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition">
